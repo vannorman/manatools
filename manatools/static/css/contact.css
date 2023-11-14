@@ -1,0 +1,63 @@
+html, body{
+    background-image:url('/static/img/toolsbright.jpg');
+    background-size:cover;
+}
+h1 {
+    font-family:KanitSemiBold;
+    font-size:3em;
+    text-align:center;
+    color:#333;
+    border-bottom:2px dotted gray;
+}
+h2 {
+    font-family:Kanit;
+    font-size:1.4em;
+    text-align:center;
+    color:#333;
+}
+input {
+    width:500px;
+}
+#title{
+    margin:0 auto;
+    text-align:center;
+    font-size:2em;
+}
+.contact {
+    width:700px
+}
+.contact.main {
+    width: 640px;
+    margin: 0 auto;
+}
+
+#submit {
+    width:200px;
+    margin-top:10px;
+}
+#message {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height:100px;
+    width: 510px;
+    font-family: Kanit;
+    margin-top:12px;
+}
+#message::placeholder {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 640px){
+    .contact, .contact.main, input {
+        width: 90%;
+    }
+    #message {width:97%}
+
+}
+
+@font-face {
+  font-family: Kanit;
+  src: url(/static/fonts/Kanit-Regular.ttf);
+}
+

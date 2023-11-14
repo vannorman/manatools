@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .left-section {
+            width: 40%;
+            float: left;
+        }
+
+        .right-section {
+            width: 60%;
+            float: right;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #0074D9;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analytics Dashboard</h1>
+        <div class="left-section">
+            <ul>
+                <li><button id="playersAllTime">Players of All Time</button></li>
+                <li><button id="playersToday">Players Today</button></li>
+                <li><button id="playersThisWeek">Players This Week</button></li>
+                <li><button id="playersThisMonth">Players This Month</button></li>
+                <!-- Add more buttons for other stats -->
+            </ul>
+        </div>
+        <div class="right-section">
+            <canvas id="chart" width="600" height="400"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('chart');
+        const ctx = canvas.getContext('2d');
+        const yAxisLabels = ['0', '20', '40', '60', '80', '100']; // Example yAxis labels
+
+        // Function to update the chart based on selected data type
+        function updateChart(dataType) {
+            // Perform AJAX call to fetch data (replace with your actual server endpoint)
+            // For now, let's use dummy data
+            const dummyData = [15, 30, 45, 60, 75, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5, 15, 25, 35, 45, 55, 65, 75, 85, 95];
+            
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw vertical lines
+            for (let i = 0; i < 25; i++) {
+                const x = (i / 24) * canvas.width;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.strokeStyle = '#ccc';
+                ctx.stroke();
+            }
+
+            // Draw data points
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#0074D9';
+            for (let i = 0; i < dummyData.length; i++) {
+                const x = (i / (dummyData.length - 1)) * canvas.width;
+                const y = canvas.height - (dummyData[i] / 100) * canvas.height;
+                ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // Update yAxis labels
+            // (You can replace this with more dynamic label generation)
+            document.querySelector('.right-section').innerHTML = `<p>${dataType}</p>`;
+        }
+
+        // Attach click event listeners to buttons
+        document.getElementById('playersAllTime').addEventListener('click', () => {
+            updateChart('Players of All Time');
+        });
+
+        document.getElementById('playersToday').addEventListener('click', () => {
+            updateChart('Players Today');
+        });
+
+        document.getElementById('playersThisWeek').addEventListener('click', () => {
+            updateChart('Players This Week');
+        });
+
+        document.getElementById('playersThisMonth').addEventListener('click', () => {
+            updateChart('Players This Month');
+        });
+        // Add event listeners for other buttons as needed
+    </script>
+</body>
+</html>
+

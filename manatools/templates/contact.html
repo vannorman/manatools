@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact us</title>
+    <link rel="stylesheet" href="/static/css/form.css" />
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <link rel="icon" type="image/png" href="/static/img/favicons/favicon.png" />
+    <link rel="stylesheet" href="/static/css/contact.css" />
+    <script> const csrf = "{{ csrf }}" </script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/form.js"></script>
+</head>
+<body>
+    <div class="contact">
+        <div class="main">
+            <h1> CONTACT US</h1> <!--id="title">🔨 Contact Us 🪚</div>-->
+            <!-- <p> At BuildMana, we are dedicated to a superior customer experience. 
+            Let us know what you're looking for, and one of our professional team members will contact you within one business day. 
+            -->
+            <h2> What do you need? We respond within 24 hours. </h2>
+            <form class="centered-form" >
+                <input type="text" placeholder="Name" id="name" name="field1" required>
+                <input type="text" placeholder="Email" id="email" name="field2" >
+                <input type="text" placeholder="Project City" id="city" name="field2" >
+                <textarea placeholder="Project Description" id="message" name="field2" ></textarea>
+                <button id="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+

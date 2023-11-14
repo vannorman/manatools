@@ -1,0 +1,212 @@
+html, body {
+    font-family:Nunito;
+    margin:0;
+    padding:0;
+    border:0;
+
+}
+
+#services {
+    font-family:Kanit;
+    font-size:4em;
+    text-align:center;
+    width:100%;
+    color:#333;
+    border-bottom:2px dotted gray;
+}
+
+#mainImage {
+    position:relative;
+    display:block;
+    width:100%;
+    height:500px;
+    overflow:hidden;
+}
+
+#mainImage .image {
+    position:absolute;
+    width:100vw;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    top:0;
+    left:0;
+}
+
+#mainImage .a {
+    background-image:url('/static/img/gallery/10-keys.jpg');
+    background-repeat:repeat;
+    left:0;
+    background-position: 100% 50%;
+    z-index:10;
+}
+#mainImage .b {
+    left:100%;
+    z-index:11;
+    background-image:url('/static/img/gallery/01-studio-0before.jpg');
+    background-position:0% 0%;
+    background-repeat:repeat;
+}
+
+#keys ul li { list-style-type:none;}
+#keys ul li:before {
+  content: '✓';
+}
+
+#leftArrow,#rightArrow {
+    position:absolute;
+    top:calc(50% - 25px);
+    height:50px;
+    width:50px;
+    left:10px;
+    background:white;
+    border-radius:15px;
+    border:2px solid black;
+    background-image:url('/static/img/left-arrow.png');
+    background-size:contain;
+    z-index:12;
+}
+#rightArrow {
+    left:calc(100% - 60px);
+    background-image:url('/static/img/right-arrow.png');
+
+}
+
+#leftArrow:hover, #rightArrow:hover {
+    cursor:pointer;
+    background-color:#ccc;
+}
+#leftArrow:hover, #rightArrow:active {
+    margin-left:1px;
+    margin-top:1px;
+
+}
+
+#what {
+    width:80%;
+    font-size:1.5em;
+    margin:0 auto;
+    margin-top:25px;
+    font-family:Nunito;
+}
+#what ul{
+    list-style-type:none;
+
+}
+#what ul li:before {
+  content: '✓';
+}
+
+#keys {
+    margin-top:20px;
+    text-align:center;
+}
+
+#keys li {
+    display:inline-block;
+    list-style-type:circle;
+}
+
+.animateBg {
+  animation-name: bg;
+  animation-duration: 2.45s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bg {
+  from {left:100%;background-position: 0vw 50%;}
+  to {left:0;background-position: 100vw 50%;}
+}
+
+/* Center the container horizontally and vertically */
+#servicesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+}
+
+/* Define the icon grid container */
+.icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center icons horizontally */
+    align-items: center; /* Center icons vertically */
+    padding: 20px; /* Padding for the container */
+    width:80%;
+    margin:0 auto;
+}
+
+/* Style each icon (placeholder for your icons) */
+.icon {
+flex: 1 1 160px;
+    width: 128px;
+    height: 128px;
+    background-color: white;
+    /* Additional styles for your icons (e.g., background-image, icon image, etc.) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    margin-top:30px;
+    /* Additional styles for your icons (e.g., background-image, icon image, etc.) */
+}
+.icon .text {
+    position:relative;
+    top:10px;
+    text-align:center;
+    font-family:NunitoBold;
+    font-size:1.2em;
+}
+
+.icon .image {
+    width: 100px;
+    height: 100px;
+    background-size:contain;
+    background-position:center;
+
+}
+
+/* Apply background images to specific "div" elements with the class "X" */
+.carpentry {
+    background-image: url('/static/img/icons/carpentry.jpg');
+}
+
+.remodel { background-image: url('/static/img/icons/remodel.jpg'); }
+.plumbing { background-image: url('/static/img/icons/plumbing.jpg'); }
+.repair {background-image: url('/static/img/icons/repair.jpg'); }
+.mover {background-image: url('/static/img/icons/mover.jpg'); }
+.masonry {background-image: url('/static/img/icons/masonry.jpg'); }
+.electric {background-image: url('/static/img/icons/electric2.jpg'); }
+.estimate {background-image: url('/static/img/icons/estimate.jpg'); }
+.decking {background-image: url('/static/img/icons/decking.jpg'); }
+.clean {background-image: url('/static/img/icons/clean.jpg'); }
+.paint {background-image: url('/static/img/icons/paint.jpg'); }
+.more {background-image: url('/static/img/icons/more.jpg'); }
+
+@media screen and (min-resolution: 2dppx) and (max-device-width: 1200px),
+    screen and (max-width: 960px){
+    #what {
+        width:85%;
+        font-size:2.5em;
+    }
+    #logo {
+        width:25%;
+    }
+
+    #phone {
+        font-size:1.4em;
+    }
+    .icon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    }
+
+
+}
+
+
+
+

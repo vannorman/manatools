@@ -1,0 +1,85 @@
+.portfolio {
+   position:relative; 
+    width:960px;
+    height:100%;
+    margin:0 auto;
+    padding-top:50px;
+}
+
+.portfolio .piece {
+    width:100%;
+    height:370px;
+    font-family:Kanit;
+    font-size:1.4em;
+    border-top:1px solid gray;
+    padding-top:20px;
+}
+
+.portfolio .text {
+display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+.portfolio .piece.right .text {
+    position:absolute; left:0; height:240px; width:calc(45% - 30px); padding:30px;
+    font-size:1.2em;
+    font-family:NunitoLight;
+
+}
+.portfolio .piece.right .image {
+    position:absolute; left:50%; 
+}
+.portfolio .piece.left .image {
+    position:absolute; left:0; 
+}
+.portfolio .piece.left .text {
+    position:absolute; left:45%; height:240px; width:calc(45% - 30px); padding:30px;
+    font-size:1.2em;
+    font-family:NunitoLight;
+
+}
+.portfolio .image {
+    height:350px; width:45%; 
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    
+}
+.studio { background-image:url(/static/img/gallery/01-studio-after.jpg) ; }
+.deck { background-image:url(/static/img/gallery/05-deck.jpeg) ; }
+.van { background-image:url(/static/img/gallery/12-van02.jpg) ; }
+.pad { background-image:url(/static/img/gallery/03-pad-after.jpg) ; }
+.bath { background-image:url(/static/img/gallery/07-baths.jpg) ; }
+
+
+@media screen and (min-resolution: 2dppx) and (max-device-width: 1200px),
+    screen and (max-width: 960px){
+    .portfolio{ width: 90%; }
+    .portfolio .piece.left .text, .portfolio .piece.right .text,
+    .portfolio .piece.left .image, .portfolio .piece.right .image,
+    .portfolio .piece.right, .portfolio.piece.left, .piece, .text, .image
+    {
+        left:auto;
+        font-size:40px;
+        font-family:NunitoLight;
+        position:relative;
+        margin:0 auto;
+        border:0;
+    }
+    .portfolio .piece {
+
+        height:auto;
+    }
+    .portfolio .piece.left .image, .portfolio .piece.right .image,
+    .portfolio .piece.left .text, .portfolio .piece.right .text {
+        width:90%;
+        border:0;
+    }
+    .image, .text {
+        width:90%;
+
+    }
+    
+}
+
