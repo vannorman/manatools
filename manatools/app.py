@@ -35,7 +35,7 @@ def contact():
 @app.context_processor
 def utility_processor():
     # Define the object you want to make accessible in all templates
-    obj = {'phone': '(512) 256-2233'}
+    obj = {'slogan': 'Your Source For Real Estate Tools' }
     
     # Return the object as a dictionary
     return {'obj': obj}

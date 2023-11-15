@@ -40,57 +40,43 @@ nav {
     margin-top:30px;
     font-family:NunitoBold;
     background-color: #faa528; /* Cyan background color */
-}
-
-/* Style the list inside the navigation bar */
-nav ul {
-    list-style-type: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Horizontal layout */
-    justify-content: space-around; /* Equal spacing between buttons */
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: center;
+
 }
 
-/* Style each navigation button */
-nav li {
+nav .item {
+    background: tomato;
+    padding: 5px;
+    width: 200px;
+    height: 150px;
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
     text-align: center;
-    flex-grow: 1; /* Equal width for all buttons */
 }
 
-/* Style the anchor (link) within each button */
-nav a {
-    display: block;
-    padding: 10px; /* Add padding for button spacing */
-    text-decoration: none; /* Remove underline from links */
-    color: #000000; /* Black text color */
-    font-weight: bold; /* Bold text */
-    transition: background-color 0.3s; /* Smooth hover effect for background */
-}
-
-/* Hover effect for buttons */
-nav a:hover {
-    background-color: #cb8114; /* Darker cyan on hover */
-}
-
-
-.break {
+nav .item .bg {
     position:relative;
-    width:100%;
-    margin-top:60px;
-    height:300px;
-    background-size:50%;
-    background-position:center;
-    background-repeat:no-repeat;
-}
-.break.toolbox{
-    background-image:url(/static/img/toolbox.jpg);
-}
-#footer {
-    width:100%;
-    background-color:#013;
-    height:240px;
+    margin:0 auto;
+    width:70%;
+    height:70%;
+    border-radius:20px;
 }
 
+nav .item .bg.appraisal {
+    background:gray;
+    
+}
 #contact {
  font-family:Kanit; 
   margin-bottom:50px;
