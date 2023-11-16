@@ -44,17 +44,17 @@ def utility_processor():
 def cityscore():
     return render_template('cityscore.html')
 
-@app.route('/about')
-def about():
-    return render_template('about.html',)
+@app.route('/appraisal')
+def appraisal():
+    return render_template('appraisal.html',)
 
 @app.route('/realtors')
 def realtors():
     return render_template('realtors.html',)
 
-@app.route('/contact')
-def internship():
-    return render_template('contact.html',)
+@app.route('/proforma')
+def proforma():
+    return render_template('proforma.html',)
 
 @app.route('/')
 def home():

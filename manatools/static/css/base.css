@@ -67,7 +67,7 @@ nav .item {
 }
 nav .item:hover{
     cursor:pointer;
-    background-color:#a00;
+    background-color:#5ac;
 }
 
 nav .item .text {

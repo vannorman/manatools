@@ -18,22 +18,5 @@
     margin:0 auto;
 }
 
-#cityScore {
-    margin: 0 auto;
-    width:600px;
-    height:300px;
-    outline:1px dotted gray;
-    display:none;
-}
 
-#cityScore .left {
-    float:left;
-    width:50%;
-    background-color:#fef;
-}
-#cityScore .right {
-    float:right;
-    width:50%;
-    background-color:#cfe;
-}
 
