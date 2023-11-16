@@ -13,19 +13,19 @@ html, body{
 }
 
 #logo {
-   top:10px;
+   top:0px;
+   left:0px;
    position:relative;
    display:block;
-   left:10px;
   height: 60px;
   width: 258px;
   margin: 0;
   padding: 5px 0 0 65px;
-  background: url(/static/img/manatoolslogo.png) 0 center no-repeat;
+  background: url(/static/img/manatools-logo.jpg) 0 center no-repeat;
   background-size:contain;
 }
 
-#phone {
+#slogan {
    position:absolute;
    display:block;
     top:10px;
@@ -39,7 +39,8 @@ html, body{
 nav {
     margin-top:30px;
     font-family:NunitoBold;
-    background-color: #faa528; /* Cyan background color */
+    height:auto;
+    background-color:gray; 
     padding: 0;
     margin: 0;
     list-style: none;
@@ -54,29 +55,40 @@ nav {
 }
 
 nav .item {
-    background: tomato;
     padding: 5px;
-    width: 200px;
-    height: 150px;
-    margin-top: 10px;
+    width: 177px;
+    height: 168px;
     color: white;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.1em;
     text-align: center;
+    transition: all 0.3s;
+    border-radius:25px;
+}
+nav .item:hover{
+    cursor:pointer;
+    background-color:#a00;
 }
 
+nav .item .text {
+    margin-top:25px;
+}
 nav .item .bg {
+    width:108px;
+    height:108px;
+    top:15px;
     position:relative;
     margin:0 auto;
-    width:70%;
-    height:70%;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    box-shadow:0 0 0 5px white, 0 0 0 7px black;
     border-radius:20px;
 }
 
-nav .item .bg.appraisal {
-    background:gray;
-    
-}
+nav .item .cityscore { background-image:url('/static/img/icons/icon-cityscore.jpg'); }
+nav .item .appraisal { background-image:url('/static/img/icons/icon-appraisal.jpg'); }
+nav .item .proforma { background-image:url('/static/img/icons/icon-proforma.jpg'); }
 #contact {
  font-family:Kanit; 
   margin-bottom:50px;
@@ -119,6 +131,9 @@ nav .item .bg.appraisal {
 
 #content {
     position:relative;
+    top:120px;
+    margin:0 auto;
+    width:960px;
 }
 
 

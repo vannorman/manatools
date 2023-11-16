@@ -40,9 +40,9 @@ def utility_processor():
     # Return the object as a dictionary
     return {'obj': obj}
 
-@app.route('/portfolio')
-def portfolio():
-    return render_template('portfolio.html')
+@app.route('/cityscore')
+def cityscore():
+    return render_template('cityscore.html')
 
 @app.route('/about')
 def about():

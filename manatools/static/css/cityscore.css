@@ -1,0 +1,14 @@
+#cityinput {
+    width:500px;
+    height:80px;
+    font-size:1.4em;
+    line-height:80px;
+    text-align:center;
+    margin:0 auto;
+}
+
+#cityinput input { 
+    height:50%; width:60%; border-radius:20px;
+    font-size: 1.4em; margin-left: 10px;
+}
+
