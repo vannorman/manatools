@@ -1,0 +1,10 @@
+.dealsheet_result{
+    display:none;
+    margin:0 auto;
+    width:600px;
+    height:300px;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image:url(/static/img/dealsheet.jpg);
+}

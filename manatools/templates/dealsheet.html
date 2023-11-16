@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<form id="partnerForm">
+            <label for="purchasePrice">Purchase Price:</label>
+            <input type="number" id="purchasePrice" name="purchasePrice">
+            <br/>
+            <label for="repairCost">Estimated Repair Cost:</label>
+            <input type="number" id="repairCost" name="repairCost">
+            <br/>
+            <label for="arv">ARV:</label>
+            <input type="number" id="arv" name="arv">
+        <div id="partnerList">
+        <!-- Partners will be added here -->
+        <div class="partner-row">
+            <label for="partnerName">Partner Name:</label>
+            <input type="text" id="partnerName" name="partnerName">
+            <label for="capitalInvested">Capital Invested:</label>
+            <input type="number" id="capitalInvested" name="capitalInvested">
+            <button id="addPartnerBtn" type="button">Add Partner</button>
+        </div>
+
+    </div>
+    </form>
+    <div id="contact">
+        <a id="generate" class="contactBtn" >GENERATE</a>
+    </div>
+    <div class="dealsheet_result">
+
+    </div>
+    {% endblock %}

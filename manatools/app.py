@@ -25,12 +25,12 @@ def contact():
 #    app[data]
     to = ['team@manatools.com','charlie@vannorman.ai']
     fr = 'team@manatools.com'
-    subject = "Construction Inquiry";
-    text = str(data);
+    subject = "Construction Inquiry"
+    text = str(data)
     server = 'manatools.com'
     mail.sendMail(to, fr, subject, text,server)
 #     mail.sendMail(['charlie@vannorman.ai'],'charlie@manatools.com','test2','test3','manatools.com')
-    return jsonify({'success':True});
+    return jsonify({'success':True})
 
 @app.context_processor
 def utility_processor():
@@ -52,9 +52,9 @@ def appraisal():
 def realtors():
     return render_template('realtors.html',)
 
-@app.route('/proforma')
-def proforma():
-    return render_template('proforma.html',)
+@app.route('/dealsheet')
+def dealsheet():
+    return render_template('dealsheet.html',)
 
 @app.route('/')
 def home():

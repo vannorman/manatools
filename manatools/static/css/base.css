@@ -30,7 +30,7 @@ html, body{
    display:block;
     top:10px;
     right:10px;
-    font-size:1.9em;
+    font-size:1.4em;
     margin-right:10px;
     margin-top:10px;
     text-decoration:none;
@@ -88,7 +88,7 @@ nav .item .bg {
 
 nav .item .cityscore { background-image:url('/static/img/icons/icon-cityscore.jpg'); }
 nav .item .appraisal { background-image:url('/static/img/icons/icon-appraisal.jpg'); }
-nav .item .proforma { background-image:url('/static/img/icons/icon-proforma.jpg'); }
+nav .item .dealsheet { background-image:url('/static/img/icons/icon-dealsheet.jpg'); }
 #contact {
  font-family:Kanit; 
   margin-bottom:50px;
