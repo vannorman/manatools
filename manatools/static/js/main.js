@@ -4,9 +4,11 @@ $(document).ready(function(){
     $('#appraisal').on('click',function(){      window.location.href='/appraisal';});
     $('#cityscore').on('click',function(){      window.location.href='/cityscore';    });
     $('#dealsheet').on('click',function(){      window.location.href='/dealsheet';    });
+    $('#analyzer').on('click',function(){      window.location.href='/analyzer';    });
     if (window.location.href.includes('appraisal') ) { $('#appraisal').parent().css('background-color','#5ac'); } 
     if (window.location.href.includes('cityscore') ) { $('#cityscore').parent().css('background-color','#5ac'); } 
     if (window.location.href.includes('dealsheet') ) { $('#dealsheet').parent().css('background-color','#5ac'); } 
+    if (window.location.href.includes('analyzer') ) { $('#analyzer').parent().css('background-color','#5ac'); } 
 
     // pro forma
     $("#addPartnerBtn").click(function() {

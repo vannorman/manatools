@@ -89,6 +89,7 @@ nav .item .bg {
 nav .item .cityscore { background-image:url('/static/img/icons/icon-cityscore.jpg'); }
 nav .item .appraisal { background-image:url('/static/img/icons/icon-appraisal.jpg'); }
 nav .item .dealsheet { background-image:url('/static/img/icons/icon-dealsheet.jpg'); }
+nav .item .analyzer { background-image:url('/static/img/icons/icon-analyzer.jpg'); }
 #contact {
  font-family:Kanit; 
   margin-bottom:50px;
