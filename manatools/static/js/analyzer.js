@@ -30,31 +30,19 @@ $(document).ready(function(){
             dataType : 'json',
             contentType : 'application/json',
             success: function (data) {
-                // Create a new instance of JSZip
-                var zip = new JSZip();
-                var zip_data = data['zip_data']
-                // Load the ZIP data
-                zip.loadAsync(zip_data).then(function (zip) {
-                    // Iterate through the files in the ZIP archive
-                    zip.forEach(function (relativePath, file) {
-                        // Read the content of each file in the ZIP archive
-                        file.async('uint8array').then(function (content) {
-                            // Do something with the file content, e.g., display images
-                            var blob = new Blob([content], { type: 'application/octet-stream' });
-                            var url = URL.createObjectURL(blob);
+                console.log(JSON.stringify(data));
+                data.responses.forEach(x=>{
+                    x.images.forEach(imageBase64=>{
+                        var img = document.createElement('img');
+                        // Set the 'src' attribute of the <img> element to the base64 data URI
+                        img.src = 'data:image/jpeg;base64,' + imageBase64; // Replace 'image/jpeg' with the appropriate image MIME type
 
-                            // Create an element to display the file (e.g., an image)
-                            var img = document.createElement('img');
-                            img.src = url;
-                            document.body.appendChild(img);
-                        });
-                    });
-                }).catch(function (error) {
-                    console.error('Error decoding ZIP archive:', error);
-                });
+                        document.body.appendChild(img);
+                 
+                    })
 
-                alert('suc:'+JSON.stringify(e));
-            },
+                   }); 
+           },
             error: function (e) {
                 alert('no:'+e);
             },
@@ -62,7 +50,5 @@ $(document).ready(function(){
     });
 });
 
-// Create a new instance of JSZip
-var zip = new JSZip();
 
 
