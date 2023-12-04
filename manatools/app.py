@@ -49,10 +49,11 @@ def analyze():
         loc = address_to_gps(address)
         gps = loc['gps']
         images = []
-        resolution = '300x200'
+        resolution = '600x400'
+        fov = '180'
         for i in range(len(loc['headings'])):
             heading = loc['headings'][i]
-            image_url = 'https://maps.googleapis.com/maps/api/streetview?size='+resolution+'&location='+gps+'&fov=80&heading='+str(round(heading))+'&pitch=0&key='+maps_api_key 
+            image_url = 'https://maps.googleapis.com/maps/api/streetview?size='+resolution+'&location='+gps+'&fov='+fov+'&heading='+str(round(heading))+'&pitch=0&key='+maps_api_key 
             response = requests.get(image_url, stream = True)
             if response.status_code == 200:
                 image_binary = response.content
@@ -87,8 +88,9 @@ def address_to_gps(address):
             vec2_normalized = normalize_vec2(vec2)
             headings = []
 
-            for i in range(6):
-                heading = math.degrees(math.atan2(float(vec2_normalized['y']),float(vec2_normalized['x']))) + (i * 60)
+            ct = 4
+            for i in range(ct):
+                heading = math.degrees(math.atan2(float(vec2_normalized['y']),float(vec2_normalized['x']))) + (i * (360/ct))
                 headings.append(heading)
 
             latitude = location['lat']
