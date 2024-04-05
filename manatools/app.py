@@ -63,14 +63,23 @@ def helpscout():
         "Content-type": "application/json",
         "Authorization": "Bearer "+access_token
     }
-    data = {
-        'query' : '(email:“laura.brown@mpls.k12.mn.us”)'
-    }
 
-    response = requests.get('https://api.helpscout.net/v2/conversations/1926714189',headers=headers)
+    # example 1
+    conversation_response = requests.get('https://api.helpscout.net/v2/conversations/1926714189',headers=headers)
+
+    #example 2
+    customers_response = requests.get('https://api.helpscout.net/v2/customers?query=(firstName:"Jenny")',headers=headers)
 
 
-    return render_template('helpscout.html',token_response=token_response.text,response=response_str,token=access_token,response_final=response.text)
+    query_response = requests.get('https://api.helpscout.net/v2/customers?query=("mpls")',headers=headers)
+
+    return render_template('helpscout.html',
+        token_response=token_response.text,
+        response=response_str,
+        token=access_token,
+        conversation_response=conversation_response.text,
+        customers_response=customers_response.text,
+        query_response=query_response.text)
         
 
 
