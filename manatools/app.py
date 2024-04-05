@@ -25,6 +25,54 @@ app.secret_key = env.get("APP_SECRET_KEY")
 #app.logger.setLevel(logging.DEBUG)  # Set log level to DEBUG for debugging
 # logging.basicConfig(filename='/home/ubuntu/manatools.com/manatools/flask.log', level=logging.DEBUG)
 
+@app.route('/helpscout', methods=['GET','POST'])
+def helpscout():
+    # Use this URL as the starting point from your browser (authenticate per call?)
+    # https://secure.helpscout.net/authentication/authorizeClientApplication?client_id=HyWuP6QL6SwHubt85iXmOCJO92zh0vTI&state=NmXm0gmKSmkszwolhdLExc7H6AVbETI1
+
+    # from https://secure.helpscout.net/users/apps/777749/48fa3b1e-341b-47a5-a9a6-4bef748c482e
+    # from https://developer.helpscout.com/mailbox-api/overview/authentication/
+    # pass authurize bearer code https://stackoverflow.com/questions/70586468/how-to-pass-an-oauth-access-token-in-an-api-call
+    code = request.args.get("code") 
+   
+    app_id = 'HyWuP6QL6SwHubt85iXmOCJO92zh0vTI' 
+    app_secret = 'NmXm0gmKSmkszwolhdLExc7H6AVbETI1'
+    data = {
+        'code' : code,
+        'client_id' : app_id,
+        'client_secret' : app_secret,
+        'grant_type' : 'authorization_code'
+    }
+
+    token_response = requests.post('https://api.helpscout.net/v2/oauth2/token',data=data)
+    response_dict = json.loads(token_response.text)
+    access_token = response_dict['access_token']
+
+    response_str = "";
+    for i in response_dict:
+        response_str += "key: " + str(i) +  "val: " + str(response_dict[i])
+
+#        access_token = json.loads(token_response.text)['access_token']
+#        data2 = {
+#            'access_token' : access_token,
+#            'query' : 'mpls',
+#        }
+#        response = requests.post('https://api.helpscout.net/v2/conversations', data2=data2)
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer "+access_token
+    }
+    data = {
+        'query' : '(email:“laura.brown@mpls.k12.mn.us”)'
+    }
+
+    response = requests.get('https://api.helpscout.net/v2/conversations/1926714189',headers=headers)
+
+
+    return render_template('helpscout.html',token_response=token_response.text,response=response_str,token=access_token,response_final=response.text)
+        
+
 
 @app.route('/contact/submit', methods=['POST'])
 def contact():
