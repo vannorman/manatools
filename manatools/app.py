@@ -28,34 +28,52 @@ app.secret_key = env.get("APP_SECRET_KEY")
 
 @app.route('/helpscout', methods=['GET','POST'])
 def helpscout():
-    try: 
-        pass
-    except:
-        pass
+    # from https://secure.helpscout.net/users/apps/777749/48fa3b1e-341b-47a5-a9a6-4bef748c482e
+    # from https://developer.helpscout.com/mailbox-api/overview/authentication/
+   
+    # In order to query the API successfully we need an access token.
+    # In order to get the access token, you must initialize the request from the helpscout website, here:
     # Use this URL as the starting point from your browser (authenticate per call?)
     # https://secure.helpscout.net/authentication/authorizeClientApplication?client_id=HyWuP6QL6SwHubt85iXmOCJO92zh0vTI&state=NmXm0gmKSmkszwolhdLExc7H6AVbETI1
 
-    # from https://secure.helpscout.net/users/apps/777749/48fa3b1e-341b-47a5-a9a6-4bef748c482e
-    # from https://developer.helpscout.com/mailbox-api/overview/authentication/
-    # pass authurize bearer code https://stackoverflow.com/questions/70586468/how-to-pass-an-oauth-access-token-in-an-api-call
-    code = request.args.get("code") 
-   
-    app_id = 'HyWuP6QL6SwHubt85iXmOCJO92zh0vTI' 
-    app_secret = 'NmXm0gmKSmkszwolhdLExc7H6AVbETI1'
-    data = {
-        'code' : code,
-        'client_id' : app_id,
-        'client_secret' : app_secret,
-        'grant_type' : 'authorization_code'
-    }
+    # This endpoint (*/helpscout) will first check if we already have an access token in the request args (GET/POST). 
+    access_token = request.args.get("access_token")
+    if access_token is None:
+        # If we do not, we must try to get an access token by getting the "code" from the can continue with the access token below. 
+        # pass authurize bearer code https://stackoverflow.com/questions/70586468/how-to-pass-an-oauth-access-token-in-an-api-call
+        code = request.args.get("code") 
+       
+        app_id = 'HyWuP6QL6SwHubt85iXmOCJO92zh0vTI' 
+        app_secret = 'NmXm0gmKSmkszwolhdLExc7H6AVbETI1'
+        data = {
+            'code' : code,
+            'client_id' : app_id,
+            'client_secret' : app_secret,
+            'grant_type' : 'authorization_code'
+        }
 
-    token_response = requests.post('https://api.helpscout.net/v2/oauth2/token',data=data)
-    response_dict = json.loads(token_response.text)
-    access_token = response_dict['access_token']
+        token_response = requests.post('https://api.helpscout.net/v2/oauth2/token',data=data)
+        response_dict = json.loads(token_response.text)
+        if 'access token' in response_dict: 
+            access_token = response_dict['access_token']
+            # debug the response if needed
+            response_str = "";
+            for i in response_dict:
+                response_str += "key: " + str(i) +  "val: " + str(response_dict[i]) + "<br/>"
 
-    response_str = "";
-    for i in response_dict:
-        response_str += "key: " + str(i) +  "val: " + str(response_dict[i]) + "<br/>"
+    # Now, either way, we should have an access token. If we do not, it is because
+    # A) No access token was passed as /helpscout?access_token=9999999
+    # B) No "code" was passed as /helpscout?code=777777 (which is generated when clicking the Approve Application via the HelpScout website)
+
+    if access_token is None:
+        return render_template('helpscout.html',
+           token_response=token_response,
+           response_str="Failed response str",
+           token="Failed to get token. It's Charlie's fault.",
+           )
+
+
+        
 
     headers = {
         "Content-type": "application/json",
@@ -67,6 +85,16 @@ def helpscout():
 
 
     query_response = requests.get('https://api.helpscout.net/v2/customers?query=(barcus*)',headers=headers)
+    if query_response.status_code != 200:
+        msg = "something went wrong, not sure what."
+        if query_response.status_code == 401:
+            # Oops, the access token we used wasn't valid.
+            msg = "Token was bad. It's Charlie's fault.",
+        return render_template('helpscout.html',
+           token_response="Error in token response",
+           response_str="Error in response str",
+           token=msg,
+        )
 
     emails = str(extract_emails(json.loads(query_response.text))) # this works
 
@@ -126,11 +154,6 @@ def helpscout():
 
 
     return render_template('helpscout.html',
-        token_response="status:"+str(token_response.status_code)+", response:"+token_response.text,
-        response=response_str,
-        token=access_token,
-#        conversation_response="status:"+str(conversation_response.status_code)+", response:"+conversation_response.text[-200:],
-#        customers_response="status:"+str(customers_response.status_code)+", response:"+ customers_response.text[-200:],
         query_response="status:"+str(query_response.status_code)+", response;"+query_response.text[-200:],
         all_convos_text=all_convos_text[-200:],
         emails=emails,

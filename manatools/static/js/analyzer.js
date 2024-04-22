@@ -32,6 +32,9 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(JSON.stringify(data));
                 data.responses.forEach(x=>{
+                    var title = document.createElement('div');
+                    title.innerHTML=x.address;
+                    document.body.appendChild(title)
                     x.images.forEach(imageBase64=>{
                         var img = document.createElement('img');
                         // Set the 'src' attribute of the <img> element to the base64 data URI
