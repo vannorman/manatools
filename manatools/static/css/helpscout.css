@@ -1,0 +1,60 @@
+html,body{
+    border:0;padding:0;margin:0;
+    font-family: "Open Sans", sans-serif;
+}
+html {
+    background: url('/static/img/background-fun.jpg') repeat;
+    background-size:80%;
+}
+th, td {
+  padding: 15px;
+}
+#uploadComplete {
+    color:#0a0;
+}
+
+#result {
+    border: 1px dotted #777;
+    margin:0 auto;
+    margin-top:30px;
+    width:80%;
+    background:#fff9;
+}
+#container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top:25%;  
+        position:relative;
+            
+   box-shadow: 1px 5px 20px rgba(0, 0, 0, 1);
+    width:60%;
+    height:70%;
+    margin:0 auto;
+    margin-top:6%;
+}
+
+.heading {
+    text-align:center;
+    width:100%;
+    font-size:2em;
+    font-weight:bold;
+}
+
+.button {
+    text-align:center;
+    width:220px;
+    height:40px;
+    border-radius:20px;
+    font-size:1.2em;
+    line-height:40px;
+    background-color:orange;
+    border:2px solid #333;
+    transition: all .3s;
+}
+
+.button:hover {
+    cursor:pointer;
+    background-color:#f70;
+}
+

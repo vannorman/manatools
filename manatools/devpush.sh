@@ -1,5 +1,5 @@
 git add .
-if [ -z "$1" ]; then echo "oops";
+if [ -z "$1" ]; then echo "usage: ./devpush.sh 'your git commitmmessage' ";
 else
     git commit -m "$1"
     git push

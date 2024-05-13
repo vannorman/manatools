@@ -1,29 +1,42 @@
-token response:{{token_response}}
-<br>
-<br>
-response:{{response}}
-<br>
-<br>
-token:{{token}}
-<br>
-<br>
-conversation example:{{conversation_response}}
-<br>
-<br>
-customers example:{{customers_response}}
-<br>
-<br>
-query response:{{query_response}}
-<br>
-<br>
-all convos text:{{all_convos_text}}
-<br>
-<br>
-emails:{{emails}}
-<br>
-<br>
-{% autoescape false %}
-csv:<br>{{csv}}
-<br>table:{{table}}
-{% endautoescape %}
-
+<html>
+    <head>
+    <script src="/static/js/jquery.min.js"></script>
+        <script src='/static/js/helpscout.js'></script>
+        <link rel='stylesheet' href='/static/css/helpscout.css' />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </head>
+<body>
+<div id="container">
+    <div class="heading">Helpscout API Dashboard</div>
+                   <table style="margin:0 auto;" border=0>
+                <tr> 
+                    <td style="text-align:right"> 
+                        Get names from emails:
+                    </td>
+                    <td> 
+                        Upload CSV File
+                            <input id="fileInput" type="file" name="file" accept=".csv" required>
+                            <button id="uploadButton" type="submit">Upload</button>
+                            <span id="uploadComplete"></span>
+                    </td>
+                    <td> 
+                        <div class="button" id="getNamesFromEmails" >Upload file first</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:right"> 
+                    <label for="Search by keyword">Search by keyword: </label>
+                    </td>
+                    <td> <input type="text" placeholder="someone@hotmail.com" id="email" name="email" required> </td>
+                    <td> 
+                        <div class="button" id="searchKeyword" >Enter Keyword</div>
+                    </td>
+                </tr>
+                </table>
+  
+</div>
+<div id="result"></div>
+</body>
+</html>
