@@ -356,7 +356,7 @@ def helpscout():
     if (headers['Access_Token'] is None):
         return redirect("https://secure.helpscout.net/authentication/authorizeClientApplication?client_id=HyWuP6QL6SwHubt85iXmOCJO92zh0vTI&state=NmXm0gmKSmkszwolhdLExc7H6AVbETI1#")
     else: 
-        return render_template('helpscout.html',{headers:headers})
+        return render_template('helpscout.html',headers=str(headers))
 
 
 @app.route('/upload', methods=['POST'])
