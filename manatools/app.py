@@ -1,3 +1,4 @@
+import urllib.parse # for a hacky way to get the host domain to check if we're on local, since helpscout api calls from local dont work
 import math 
 import sys
 import requests
@@ -351,12 +352,17 @@ basic_auth = BasicAuth(app)
 @app.route('/helpscout', methods=['GET','POST'])
 @basic_auth.required
 def helpscout():
+    host=str(urllib.parse.urlparse(request.base_url).hostname)
+    localhost = False
+    if host == '127.0.0.1': 
+        localhost = True
+        localmessage = "Localhost detected. You need to get auth headers from the server to make Helpscout api calls. Fill it in here."
     headers = get_headers_with_access_token(request)
-    print(headers)
-    if (headers['Access_Token'] is None):
+    print("headers:"+str(headers))
+    if localhost == False and (headers['Access_Token'] is None):
         return redirect("https://secure.helpscout.net/authentication/authorizeClientApplication?client_id=HyWuP6QL6SwHubt85iXmOCJO92zh0vTI&state=NmXm0gmKSmkszwolhdLExc7H6AVbETI1#")
     else: 
-        return render_template('helpscout.html',headers=str(headers))
+        return render_template('helpscout.html',headers=str(headers),localmessage=localmessage)
 
 
 @app.route('/upload', methods=['POST'])
@@ -376,11 +382,39 @@ def upload():
     if file:
         df = pd.read_csv(file)
         print('df: ~~~~ ~~~~ ')
+        emails = []
         for index, row in df.iterrows():
-            print(row.values)
-        return jsonify({ 'emails' : df.to_html(), 'count' : df.shape[0] })
+            emails.append(row.values[0])
+        return jsonify({ 'emails' : emails, 'count' : df.shape[0] })
         # return df.to_html()  # Display parsed CSV as HTML table
 
+@app.route('/convertEmails', methods=['POST'])
+def convertEmails():
+    data = request.get_json()
+    
+    # print('rq args:'+str(data))
+    names = []
+
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": data['authorization'],
+    }
+
+    items = []
+    for email in data['emails'][:4]:
+        query_response = requests.get('https://api.helpscout.net/v2/customers?query=('+email+'*)',headers=headers)
+        print("Q: !!!!! ~~~~~`  "+ query_response.text)
+        r = json.loads(query_response.text)
+        try: 
+            item = [email,
+                r['_embedded']['customers'][0]['firstName'],
+                r['_embedded']['customers'][0]['lastName'], ]
+        except:
+            item = [email,'None','None']
+        items.append(item)
+    auth_token = request.args.get("authorization")
+    print (auth_token)
+    return jsonify({'items':items})
 
 @app.route('/helpscout2', methods=['GET','POST'])
 def helpscout2():
