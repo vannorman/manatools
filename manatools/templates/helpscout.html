@@ -8,6 +8,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     </head>
 <body>
+<div id="headers">
+{% autoescape false %}
+{{headers}}
+{% endautoescape %}
+</div>
 <div id="container">
     <div class="heading">Helpscout API Dashboard</div>
                    <table style="margin:0 auto;" border=0>
