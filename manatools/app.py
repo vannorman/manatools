@@ -23,11 +23,12 @@ try: from settings_local import mail
 except: pass
 
 app = Flask(__name__)
+load_dotenv() 
 app.secret_key = env.get("APP_SECRET_KEY")
 
 app.config['BASIC_AUTH_USERNAME'] = os.getenv('BASIC_AUTH_USERNAME')
 app.config['BASIC_AUTH_PASSWORD'] = os.getenv('BASIC_AUTH_PASSWORD')
-
+print('hi?:'+app.config['BASIC_AUTH_USERNAME'])
 @app.route('/csv', methods=['GET','POST'])
 def parse_customer_emails():
     # Input is the raw Xero XLS data, with relevant headers:
@@ -672,7 +673,7 @@ def get_headers_with_access_token(request):
     if access_token is None:
         
         
-        print ('FAIL')
+        print ('get headers access token, currently None')
         # If we do not, we must try to get an access token by getting the "code" from the can continue with the access token below. 
         # pass authurize bearer code https://stackoverflow.com/questions/70586468/how-to-pass-an-oauth-access-token-in-an-api-call
         code = request.args.get("code") 
@@ -689,12 +690,9 @@ def get_headers_with_access_token(request):
 
         token_response = requests.post('https://api.helpscout.net/v2/oauth2/token',data=data)
         response_dict = json.loads(token_response.text)
-        if 'access token' in response_dict: 
+        print ('get response from request access token? : '+token_response.text)
+        if 'access_token' in response_dict:
             access_token = response_dict['access_token']
-            # debug the response if needed
-            response_str = "";
-            for i in response_dict:
-                response_str += "key: " + str(i) +  "val: " + str(response_dict[i]) + "<br/>"
         else: 
             print('NO access token')
             response_str = ""
