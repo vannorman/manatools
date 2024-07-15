@@ -386,6 +386,7 @@ basic_auth = BasicAuth(app)
 def helpscout():
     host=str(urllib.parse.urlparse(request.base_url).hostname)
     localhost = False
+    localmessage = "Nonlocal detected"
     if host == '127.0.0.1': 
         localhost = True
         localmessage = "Localhost detected. You need to get auth headers from the server to make Helpscout api calls. Fill it in here."
