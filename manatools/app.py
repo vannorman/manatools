@@ -89,7 +89,39 @@ def parse_customer_emails():
         table=csv_string_to_html_table(csv)
         )
 
+@app.route('/helpscout/search_keyword', methods=['GET','POST'])
+def search_keyword_helpscout():
+    headers = get_headers_with_access_token(request)
+    data = request.get_json()
+    keyword = data['keyword']
 
+    endpoint = 'https://api.helpscout.net/v2/customers?query=('+keyword+'*)'
+    
+    try: query_response = requests.get(endpoint,headers=headers)
+    except: 
+        return render_template('helpscout.html',
+           token_response="Error in token response",
+           response_str="Error in response str",
+           )
+        
+    if query_response.status_code != 200:
+        msg = "something2 went wrong, not sure what."
+        if query_response.status_code == 401:
+            # Oops, the access token we used wasn't valid.
+            msg = "Token was bad. It's Charlie's fault.",
+        return render_template('helpscout.html',
+           token_response="Error in token response",
+           response_str="Error in response str",
+           token=msg,
+        )
+    
+    return_data = json.loads(query_response.text) 
+    return render_template('helpscout.html',
+        query_response="status:"+str(query_response.status_code)+", response;"+query_response.text[-200:],
+        csv="data:"+return_data,
+        # table=csv_string_to_html_table(csv)
+        )
+ 
 
 @app.route('/helpscout/email_to_name', methods=['GET','POST'])
 def match_email_to_name_helpscout():
@@ -401,7 +433,7 @@ def convertEmails():
     }
 
     items = []
-    for email in data['emails'][:4]:
+    for email in data['emails']:
         query_response = requests.get('https://api.helpscout.net/v2/customers?query=('+email+'*)',headers=headers)
         print("Q: !!!!! ~~~~~`  "+ query_response.text)
         r = json.loads(query_response.text)
@@ -418,7 +450,6 @@ def convertEmails():
 
 @app.route('/helpscout2', methods=['GET','POST'])
 def helpscout2():
-    print("BASIC_AUTH_PASSWORD:", app.config['BASIC_AUTH_PASSWORD'])  # Print password for debugging
     headers = get_headers_with_access_token(request)
 
     query_response = requests.get('https://api.helpscout.net/v2/customers?query=(barcus*)',headers=headers)

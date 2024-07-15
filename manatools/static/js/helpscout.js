@@ -1,7 +1,38 @@
 getNamesFromEmailsReady = false;
 emailsResponse = null;
 $(document).ready(function(){
-    $('#getNamesFromEmails').on('click',function(){
+    $('#searchKeyword').on('click',function(){
+
+             event.preventDefault();
+             $.ajax({
+                type: 'POST',
+                url: "/helpscout/search_keyword",
+                headers: {
+//                    "X-CSRFToken" : csrf,
+                    "Content-Type": "application/json"
+                },
+                data : JSON.stringify({ 
+                    keyword : $('#keyword').val(),
+                    authorization : $('#AuthorizationHeader').val(),
+                    }),
+                dataType : 'json',
+                contentType : 'application/json',
+                success: function (data) {
+                    console.log(data)
+                    for (var i=0;i<data['items'].length;i++){
+                        for (var j=0;j<data['items'][i].length;j++){
+                            $('#result').append(data['items'][i][j]+",");
+                        }
+                        $('#result').append('<br>');
+                    }
+                },
+                error: function (e) {
+                    console.log('fail keyword:'+JSON.stringify(e));
+                },
+            });
+            console.log('fin click keyword');
+    });
+     $('#getNamesFromEmails').on('click',function(){
         if (!getNamesFromEmailsReady) {
             alert('upload file first');
         } else {
